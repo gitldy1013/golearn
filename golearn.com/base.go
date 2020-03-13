@@ -5,6 +5,7 @@ import "fmt"
 func main() {
 	test_1()
 	test_2()
+	multiplicationSelf(9, true)
 }
 
 func test_1() {
@@ -41,4 +42,17 @@ func test_2() {
 		}
 	}
 	fmt.Println(count)
+}
+
+func multiplicationSelf(x int, bl bool) {
+	for i := 1; i <= x; i++ {
+		for j := 1; j <= i; j++ {
+			if bl {
+				fmt.Printf("%v * %v = %v ", i, j, i*j)
+			} else {
+				fmt.Printf("%v * %v = %v ", j, i, i*j)
+			}
+		}
+		fmt.Println()
+	}
 }
