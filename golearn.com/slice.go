@@ -6,13 +6,13 @@ import (
 )
 
 func main() {
-	//testSlice_1()
-	//testSlice_2()
-	//testMake_1()
-	//testMake_2()
-	//testForSlice()
-	//sliceFunction()
-	//testWork_1()
+	testSlice_1()
+	testSlice_2()
+	testMake_1()
+	testMake_2()
+	testForSlice()
+	sliceFunction()
+	testWork_1()
 	testWork_2()
 }
 
@@ -143,7 +143,7 @@ func testWork_1() {
 		a = append(a, fmt.Sprintf("%v", i))
 	}
 	fmt.Println(fmt.Sprintf("%T", a[0]))
-	fmt.Printf("%s", a)
+	fmt.Printf("%#v", a)
 	//前面五个空{"","","","","","0","1","2","3","4","5","6","7","8","9"}
 }
 

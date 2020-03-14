@@ -3,7 +3,6 @@ package main
 import "fmt"
 
 func main() {
-
 	fmt.Printf("%T", "hello")
 	var arr = [...]int{1, 3, 5, 7, 8}
 	test1(arr)
