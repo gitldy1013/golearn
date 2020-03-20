@@ -11,7 +11,9 @@ func main() {
 	//fmt.Println(intSum_2(999,999))
 	//fmt.Println(intSum_3(999,999))
 	//fmt.Println(intSum_4(999,999,998))
+	//fmt.Println(intSum_4())//可变参数也可以不传
 	//fmt.Println(intSum_5(998,999,1000))
+	//fmt.Println(intSum_5(888))//固定参数和可变参数同时出现时固定参数部分必须传入
 	//fmt.Printf("%#v\n",someFunc(""))
 	//fmt.Println(num)
 	//testGlobalVar()
@@ -66,10 +68,17 @@ func intSum_2(x, y int) int {
 	return x + y
 }
 
+//返回值定义参数时需要用小括号包裹
+func intSub_2(x, y int) (ret int) {
+	ret = x - y
+	return //此时可以不写返回值 但return关键字不可省略
+}
+
 func intSum_3(x, y int) (int, int) {
 	return x + y, x
 }
 
+//可变参数
 func intSum_4(x ...int) (int, int) {
 	sum := 0
 	for i := 0; i < len(x); i++ {
@@ -78,14 +87,15 @@ func intSum_4(x ...int) (int, int) {
 	return sum, len(x)
 }
 
-//可变参数必须放在最后 参数和返回值不能冲突定义
-func intSum_5(y int, x ...int) (sum int, yr int) {
+//可变参数必须放在最后 参数和返回值不能冲突定义 返回值也支持类型简写
+func intSum_5(y int, x ...int) (sum, yr int) {
 	//sum := 0
 	for _, v := range x {
 		sum += v
 	}
 	yr = y
-	return sum, yr
+	//return sum, yr
+	return
 }
 
 //返回切片
@@ -369,15 +379,64 @@ func dispatchCoin() (res int) {
 	//standard := make(map[string]int,4)
 	standard := map[string]int{"e": 1, "i": 2, "o": 3, "u": 4}
 	for i := 0; i < len(users); i++ {
+		distribution[users[i]] = 0
+		lower := strings.ToLower(users[i])
 		for index, value := range standard {
-			if strings.Contains(strings.ToLower(users[i]), index) {
-				count := strings.Count(users[i], index)
+			if strings.Contains(lower, index) {
+				count := strings.Count(lower, index)
 				distribution[users[i]] += value * count
 				coins -= value * count
 				fmt.Println(users[i]+" "+index+" 当前金币:", coins)
 			}
 		}
 	}
-	fmt.Printf("%#v", distribution)
+	fmt.Printf("%#v\n", distribution)
 	return coins
 }
+
+/*
+python的实现
+
+namestr='Matthew,Sarah,Augustus,Heidi,Emilie,Peter,Giana,Adriano,Aaron,Elizabeth'
+namelist=namestr.split(',')
+coindir={}
+
+for i in namelist:
+    coindir[i]=0
+# print(coindir)
+new_coindir=coindir
+
+
+def addcoin(namelist):
+    zimustr = 'e,i,o,u'
+    zimulist=zimustr.split(',')
+    ZIMUstr = 'E,I,O,U'
+    ZIMUlist = ZIMUstr.split(',')
+    for i in namelist:
+        for j in i :
+            # print(j)
+            if j ==zimulist[0] or j ==ZIMUlist[0] :
+                new_coindir[i]+=1
+            elif j ==zimulist[1] or j ==ZIMUlist[1] :
+                new_coindir[i]+=2
+            elif j == zimulist[2] or j == ZIMUlist[2]:
+                new_coindir[i] += 3
+            elif j == zimulist[3] or j == ZIMUlist[3]:
+                new_coindir[i] += 4
+
+
+def leftcoin(new_coindir):
+    all_coin=50
+    now_coin=0
+    for value in new_coindir:
+        now_coin=all_coin-new_coindir[value]
+        all_coin=now_coin
+        print(now_coin)
+    return now_coin
+
+
+addcoin(namelist)
+print(new_coindir)
+left_coin=leftcoin(new_coindir)
+print('剩余的金币数是：'+ str(left_coin))
+*/
