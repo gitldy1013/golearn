@@ -290,7 +290,7 @@ func defer_case() {
 
 //defer 面试题 ==end==
 
-//panic/recover
+//panic/recover ==start==
 func funcAp() {
 	fmt.Println("func A")
 }
@@ -349,7 +349,7 @@ func recoverDemo() {
 	1.recover()必须搭配defer使用。
 	2.defer一定要在可能引发panic的语句之前定义。
 */
-//panic/recover
+//panic/recover ==end==
 
 /*
 分金币:
